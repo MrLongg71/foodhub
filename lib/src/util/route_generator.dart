@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodhub/src/module/dashboard/page/dashboard_page.dart';
 import 'package:foodhub/src/module/home/pages/home_page.dart';
 import 'package:foodhub/src/module/login/page/introduction_page.dart';
 import 'package:foodhub/src/module/login/page/sign_in_page.dart';
@@ -13,6 +14,8 @@ class RouteGenerator {
         return _buildRoute(settings, IntroductionPage());
       case '/sign-in':
         return _buildRoute(settings, SignInPage());
+      case '/dashboard':
+        return _buildRoute(settings, DashboardPage());
       case '/home':
         return _buildRoute(settings, HomePage());
       default:

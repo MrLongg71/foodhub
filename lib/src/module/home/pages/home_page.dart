@@ -7,10 +7,10 @@ class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   double paddingTop;
 
   @override
@@ -55,6 +55,11 @@ class _HomePageState extends State<HomePage> {
               SliverList(
                 delegate: SliverChildListDelegate([
                   _buildCateList(),
+                  _buildPopularList(),
+                  _buildTitle(),
+                  _buildPopularList(),
+                  _buildTitle(),
+                  _buildPopularList(),
                 ]),
               ),
             ],
@@ -100,6 +105,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildBoxSearch() {
     return Container(
+      padding: EdgeInsets.only(bottom: 5),
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -155,7 +161,6 @@ class _HomePageState extends State<HomePage> {
             physics: ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
-
               // var dataPage =
               // snapshot.data.skip(index * 4).take(4).toList();
 
@@ -194,19 +199,102 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildFeatureList(){
-    return
+  Widget _buildTitle() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Row(
+        children: [
+          Expanded(
+              child: Text(
+            "Popular",
+            style: StylesText.body21CenterBoldWhite,
+          )),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                color: MyColors.bgTextField),
+            child: Text("More"),
+          ),
+        ],
+      ),
+    );
   }
 
-  Widget _buildFeatureItem(){
+  Widget _buildPopularList() {
     return Container(
-      child: Stack(
-        children: [
-          Image.asset(UIData.image1),
-          Text("McDonald's"),
-          Row(children: [
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      height: 230,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 10,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext ctx, int index) {
+            return _buildPopularItem();
+          }),
+    );
+  }
 
-          ],),
+  Widget _buildPopularItem() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+          color: MyColors.bgTextField, borderRadius: BorderRadius.circular(10)),
+      width: 200,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                child: Image.asset(
+                  UIData.image1,
+                  height: 150,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+              Positioned(top: 10, right: 10, child: Icon(Icons.favorite)),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            child: Text(
+              "McDonald's",
+              style: StylesText.body17CenterRegularWhite,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 3.0),
+                  child: Text(
+                    "4.5",
+                    style: StylesText.body12White,
+                  ),
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 15,
+                ),
+                Spacer(),
+                Icon(
+                  Icons.mode_comment_outlined,
+                  size: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 3.0),
+                  child: Text(
+                    "5",
+                    style: StylesText.body12White,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

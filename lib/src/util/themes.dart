@@ -112,7 +112,7 @@ class Themes {
     backgroundColor: DarkColors.primaryColor,
     primarySwatch: Colors.red,
     dividerColor: MyColors.slate,
-    iconTheme: IconThemeData(size: 24, color: Colors.red),
+    iconTheme: IconThemeData(size: 20, color: Colors.white),
     cursorColor: Colors.white,
     // background color of text field
     secondaryHeaderColor: Color(0xff485164),
@@ -187,7 +187,6 @@ class LightColors {
 
 class DarkColors {
   static const primaryColor = const Color(0xff20242F);
-
 //  static const accentColor = const Color(0xffF54B64);
   static const accentColor = MyColors.orangeLight;
   static const blackColor = const Color(0xff1d1d26);

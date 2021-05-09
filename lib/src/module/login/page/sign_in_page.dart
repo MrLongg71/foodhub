@@ -12,7 +12,6 @@ class SignInPage extends StatefulWidget {
   @override
   _SignInPageState createState() => _SignInPageState();
 }
-
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
@@ -95,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () {
-          navigateToNewScreen('/home');
+          navigateToNewScreen('/dashboard');
         },
       ),
     );
@@ -124,7 +123,6 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
-
 
   navigateToNewScreen(String routeName, {dynamic argument}) {
     Navigator.of(context, rootNavigator: true)
