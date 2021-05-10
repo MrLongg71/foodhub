@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/styles.dart';
@@ -12,6 +14,27 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   double paddingTop;
+  int indexSelected;
+  PageController pageBannerController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageBannerController = PageController(initialPage: 1);
+    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (indexSelected < 10) {
+        indexSelected++;
+      } else {
+        indexSelected = 0;
+      }
+
+      pageBannerController.animateToPage(
+        indexSelected,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +58,7 @@ class HomePageState extends State<HomePage> {
             slivers: [
               SliverPersistentHeader(
                 delegate: _SliverPersistentHeader(
-                  infoBar: Container(
-                      // color: Colors.transparent,
-                      child: Stack(
-                    children: [
-                      Container(
-                        height: 300,
-                        color: Colors.red,
-                      ),
-                      Icon(Icons.ac_unit),
-                    ],
-                  )),
+                  infoBar: _buildBannerList(),
                   appBar: _buildBoxSearch(),
                   minHeight: 60,
                   maxHeight: 200,
@@ -55,6 +68,7 @@ class HomePageState extends State<HomePage> {
               SliverList(
                 delegate: SliverChildListDelegate([
                   _buildCateList(),
+                  _buildTitle(),
                   _buildPopularList(),
                   _buildTitle(),
                   _buildPopularList(),
@@ -66,6 +80,72 @@ class HomePageState extends State<HomePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildBannerList() {
+    return Container(
+      height: 300,
+      child: PageView.builder(
+        pageSnapping: true,
+        controller: pageBannerController,
+        onPageChanged: (index) {
+          setState(() {
+            indexSelected = index;
+          });
+        },
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return _buildBannerItem();
+        },
+      ),
+    );
+  }
+
+  Widget _buildBannerItem() {
+    return Stack(
+      children: [
+        Container(
+          height: double.infinity,
+          child: Image.asset(
+            UIData.image1,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned(bottom: 10, left: 0, right: 0, child: buildSelector()),
+      ],
+    );
+  }
+
+  Widget buildSelector() {
+    return Container(
+      height: 7,
+      alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(0),
+        itemBuilder: (context, index) {
+          buildItem(Color color) => Container(
+                width: 7,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: color,
+                ),
+              );
+
+          if (indexSelected == index) return buildItem(MyColors.orangeLight);
+          return buildItem(MyColors.slate);
+        },
+        itemCount: 10,
+        separatorBuilder: (context, index) => Container(
+          width: 7,
+        ),
+      ),
     );
   }
 
@@ -114,6 +194,7 @@ class HomePageState extends State<HomePage> {
           Expanded(
             child: TextField(
               decoration: InputDecoration(
+                enabled: false,
                 filled: true,
                 fillColor: MyColors.bgTextField,
                 contentPadding: EdgeInsets.all(10),
@@ -155,31 +236,12 @@ class HomePageState extends State<HomePage> {
       height: 130,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: PageView.builder(
-            itemCount: (10 / 4).ceil(),
-            pageSnapping: true,
+        child: ListView.builder(
+            itemCount: 10,
             physics: ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
-              // var dataPage =
-              // snapshot.data.skip(index * 4).take(4).toList();
-
-              // var lstItem =
-              //     .map((user) => _buildCateItem())
-              //     .toList();
-
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 2 / 3,
-                  crossAxisSpacing: 9,
-                  mainAxisSpacing: 9,
-                ),
-                padding: EdgeInsets.all(0),
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) => _buildCateItem(),
-              );
+              return _buildCateItem();
             }),
       ),
     );
@@ -187,9 +249,10 @@ class HomePageState extends State<HomePage> {
 
   Widget _buildCateItem() {
     return Container(
-      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-          color: Colors.white12,
+          color: MyColors.bgTextField,
           border: Border.all(color: Colors.white12),
           borderRadius: BorderRadius.all(Radius.circular(80))),
       child: Column(

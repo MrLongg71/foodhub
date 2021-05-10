@@ -107,7 +107,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTabBar() {
     return CupertinoTabBar(
-      backgroundColor: MyColors.dark,
+      backgroundColor: Theme.of(context).backgroundColor,
       onTap: onTabTap,
       activeColor: MyColors.tanHide,
       items: <BottomNavigationBarItem>[
