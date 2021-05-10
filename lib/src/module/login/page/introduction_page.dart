@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodhub/src/util/colors.dart';
+import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 
 class IntroductionPage extends StatefulWidget {
@@ -7,64 +9,90 @@ class IntroductionPage extends StatefulWidget {
 }
 
 class _IntroductionPageState extends State<IntroductionPage> {
+  double paddingTop;
+  PageController pageIntroController;
+
   @override
   void initState() {
     super.initState();
+    pageIntroController = PageController();
   }
 
   @override
   Widget build(BuildContext context) {
-    double paddingTop = MediaQuery.of(context).padding.top;
-    //_scale = 1 - _controller.value;
+    paddingTop = MediaQuery.of(context).padding.top;
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(UIData.background),
-            fit: BoxFit.cover,
-          ),
-        ),
+        body: PageView(
+      controller: pageIntroController,
+      children: [
+        _buildIntro(
+            UIData.ic_intro_1,
+            "Browse your menu \n and order directly",
+            " Our app can send you everywhere, even \n space. For only 2.99 per month",
+            () => pageIntroController.animateToPage(1,
+                duration: Duration(milliseconds: 500), curve: Curves.linear)),
+        _buildIntro(
+            UIData.ic_intro_2,
+            "Even to space \n with us! Together",
+            " Our app can send you everywhere, even \n space. For only 2.99 per month",
+            () => pageIntroController.animateToPage(2,
+                duration: Duration(milliseconds: 500), curve: Curves.linear)),
+        _buildIntro(
+            UIData.ic_intro_3,
+            "Pickup delivery \n at your door",
+            " Our app can send you everywhere, even \n space. For only 2.99 per month",
+            () => navigateToNewScreen('/welcome')),
+      ],
+    ));
+  }
+
+  Widget _buildIntro(String image, String title, String desc, Function onTap) {
+    return Container(
+      padding: EdgeInsets.only(top: paddingTop),
+      child: Center(
         child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: paddingTop,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(image),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: StylesText.body30RegularSFProText,
                 ),
-               // _logoApp(),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text(
+                  desc,
+                  style: StylesText.body14RegularWhite,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              InkWell(
+                onTap: onTap,
+                child: Container(
+                  margin: EdgeInsets.only(top: 50),
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: MyColors.tanHide),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  // Widget _logoApp() {
-  //   return AvatarGlow(
-  //     endRadius: 120,
-  //     duration: const Duration(seconds: 2),
-  //     repeat: true,
-  //     repeatPauseDuration: const Duration(seconds: 1),
-  //     child: Material(
-  //       elevation: 1.0,
-  //       shape: CircleBorder(),
-  //       child: Container(
-  //         height: 180,
-  //         width: 180,
-  //         decoration: BoxDecoration(
-  //           color: Colors.green,
-  //           borderRadius: BorderRadius.circular(120.0),
-  //         ),
-  //         child: Image.asset(
-  //           UIData.logoApp,
-  //           height: 180,
-  //           width: 180,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  navigateToNewScreen(String routeName, {dynamic argument}) {
+    Navigator.of(context, rootNavigator: true)
+        .pushNamed(routeName, arguments: argument);
+  }
 }

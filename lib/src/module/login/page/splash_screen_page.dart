@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/uidata.dart';
@@ -11,6 +13,10 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
     super.initState();
+    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      navigateToNewScreen('/intro');
+      timer.cancel();
+    });
   }
 
   @override
@@ -24,5 +30,10 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   Widget _logoApp() {
     return Image.asset(UIData.logoApp);
+  }
+
+  navigateToNewScreen(String routeName, {dynamic argument}) {
+    Navigator.of(context, rootNavigator: true)
+        .pushNamed(routeName, arguments: argument);
   }
 }

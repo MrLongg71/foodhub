@@ -14,6 +14,10 @@ class UIData {
   static const String ic_2 = "$imageDir/ic_2.png";
   static const String ic_3 = "$imageDir/ic_3.png";
 
+  static const String ic_intro_1 = "$imageDir/intro1.png";
+  static const String ic_intro_2 = "$imageDir/intro2.png";
+  static const String ic_intro_3 = "$imageDir/intro3.png";
+
   static const String ic_menu = "$imageDir/ic_menu.png";
   static const String ic_filter = "$imageDir/ic_filter.png";
   static const String ic_user_default = "$imageDir/ic_user_default.png";

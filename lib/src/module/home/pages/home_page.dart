@@ -20,6 +20,7 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    indexSelected = -1;
     pageBannerController = PageController(initialPage: 1);
     Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (indexSelected < 10) {
