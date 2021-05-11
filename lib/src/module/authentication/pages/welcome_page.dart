@@ -29,8 +29,6 @@ class _WelcomeFormState extends State<WelcomeForm> {
   Size _size;
   Widget loadingWidget;
   bool showBtnGmail = true;
-  TextEditingController _phoneController;
-  TextEditingController _passController;
   bool isDarkMode = false;
 
   ProgressDialog progressDialog = ProgressDialog();

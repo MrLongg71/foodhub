@@ -1,18 +1,19 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:foodhub/src/widgets/stateless/custom_text_field.dart';
-import 'package:foodhub/src/widgets/stateless/sign_in_with.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key key}) : super(key: key);
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
-class _SignInPageState extends State<SignInPage> {
+
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +40,15 @@ class _SignInPageState extends State<SignInPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Login",
+                  "Sign Up",
                   style: StylesText.body30RegularSFProText,
+                ),
+                CustomTextField(
+                  hintText: "Full name",
+                  titleText: "Full name",
+                  backgroundColor: MyColors.bgTextField,
+                  borderColor: MyColors.bgTextField,
+                  hasBorder: true,
                 ),
                 CustomTextField(
                   hintText: "Your email",
@@ -57,9 +65,8 @@ class _SignInPageState extends State<SignInPage> {
                   hasBorder: true,
                 ),
                 _buildTextForgotPassword(),
-                _buildButtonLogin(),
-                _buildTextSignUp(),
-                SignInWith()
+                _buildButtonSignUp(),
+                _buildTextSignIn(),
               ],
             ),
           )
@@ -78,7 +85,7 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _buildButtonLogin() {
+  Widget _buildButtonSignUp() {
     return Container(
       margin: EdgeInsets.only(top: 40, left: 30, right: 30),
       width: double.infinity,
@@ -87,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
         radius: 28,
         pureColor: MyColors.tanHide,
         text: Text(
-          "Sign In",
+          "Sign Up",
           style: Theme.of(context)
               .textTheme
               .headline
@@ -100,24 +107,25 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  Widget _buildTextSignUp() {
+  Widget _buildTextSignIn() {
     return Container(
       margin: EdgeInsets.only(top: 30),
       alignment: Alignment.center,
       child: RichText(
         text: TextSpan(
-          text: 'Don have an account? ',
+          text: 'Already account? ',
           style: StylesText.body14RegularWhite,
           children: <TextSpan>[
             TextSpan(
-              text: 'Sign up',
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: MyColors.tanHide,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14.0),
-            ),
+                text: 'Sign in',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: MyColors.tanHide,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14.0),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => navigateToNewScreen('/sign-in')),
           ],
         ),
       ),
