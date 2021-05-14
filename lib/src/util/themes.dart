@@ -124,9 +124,9 @@ class Themes {
       elevation: 1,
       textTheme: TextTheme(
           headline6: TextStyle(
-        color: Colors.blue,
+        color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontSize: 28.0,
+        fontSize: 24.0,
       )),
     ),
     textTheme: TextTheme(
@@ -187,6 +187,7 @@ class LightColors {
 
 class DarkColors {
   static const primaryColor = const Color(0xff20242F);
+
 //  static const accentColor = const Color(0xffF54B64);
   static const accentColor = MyColors.orangeLight;
   static const blackColor = const Color(0xff1d1d26);

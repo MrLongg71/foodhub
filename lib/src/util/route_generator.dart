@@ -6,13 +6,14 @@ import 'package:foodhub/src/module/authentication/pages/splash_screen_page.dart'
 import 'package:foodhub/src/module/authentication/pages/verification_code_page.dart';
 import 'package:foodhub/src/module/authentication/pages/welcome_page.dart';
 import 'package:foodhub/src/module/dashboard/page/dashboard_page.dart';
+import 'package:foodhub/src/module/foods/pages/review_page.dart';
 import 'package:foodhub/src/module/home/pages/home_page.dart';
 
 class RouteGenerator {
   static Route routeAll(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return _buildRoute(settings, SplashScreenPage());
+        return _buildRoute(settings, ReviewPage());
       case '/intro':
         return _buildRoute(settings, IntroductionPage());
       case '/welcome':
