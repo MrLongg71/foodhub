@@ -23,6 +23,15 @@ class UIData {
   static const String ic_user_default = "$imageDir/ic_user_default.png";
   static const String ic_cate1 = "$imageDir/ic_cate1.png";
   static const String image1 = "$imageDir/image1.png";
+
+  static const String ic_document = "$imageDir/ic_document.png";
+  static const String ic_helps = "$imageDir/ic_helps.png";
+  static const String ic_location = "$imageDir/ic_location.png";
+  static const String ic_logout = "$imageDir/ic_logout.png";
+  static const String ic_message = "$imageDir/ic_message.png";
+  static const String ic_profile = "$imageDir/ic_profile.png";
+  static const String ic_setting = "$imageDir/ic_setting.png";
+  static const String ic_wallet = "$imageDir/ic_wallet.png";
 }
 
 class AppSize {

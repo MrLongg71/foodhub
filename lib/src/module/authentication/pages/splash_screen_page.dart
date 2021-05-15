@@ -14,7 +14,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     super.initState();
     Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      navigateToNewScreen('/verification-code');
+      navigateToNewScreen('/intro');
       timer.cancel();
     });
   }

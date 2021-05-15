@@ -13,7 +13,7 @@ class RouteGenerator {
   static Route routeAll(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return _buildRoute(settings, ReviewPage());
+        return _buildRoute(settings, SplashScreenPage());
       case '/intro':
         return _buildRoute(settings, IntroductionPage());
       case '/welcome':
@@ -28,6 +28,8 @@ class RouteGenerator {
         return _buildRoute(settings, DashboardPage());
       case '/home':
         return _buildRoute(settings, HomePage());
+      case '/review':
+        return _buildRoute(settings, ReviewPage());
       default:
         return _errorRoute();
     }

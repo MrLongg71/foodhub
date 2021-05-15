@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:foodhub/src/module/dashboard/page/drawer_menu_page.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
@@ -17,6 +17,12 @@ class HomePageState extends State<HomePage> {
   double paddingTop;
   int indexSelected;
   PageController pageBannerController;
+
+  double xOffset = 0;
+  double yOffset = 0;
+  double scaleFactor = 1;
+
+  bool isDrawerOpen = false;
 
   @override
   void initState() {
@@ -42,46 +48,70 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     paddingTop = MediaQuery.of(context).padding.top;
     return Scaffold(
-      body: _buildBody(),
-    );
+        body: Stack(
+      children: [
+        DrawerMenuPage(),
+        _buildBody(),
+      ],
+    ));
   }
 
   Widget _buildBody() {
-    return Column(
-      children: [
-        _buildAppbar(),
-        Container(
-          color: Colors.white12,
-          height: 0.5,
+    return AnimatedContainer(
+      transform: Matrix4.translationValues(xOffset, yOffset, 0)
+        ..scale(scaleFactor)
+        ..rotateY(isDrawerOpen ? -0.5 : 0),
+      duration: Duration(milliseconds: 250),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).backgroundColor,
+          borderRadius: BorderRadius.circular(isDrawerOpen ? 30 : 0.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 1),
+            ),
+          ],
         ),
-        Expanded(
-          child: CustomScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            slivers: [
-              SliverPersistentHeader(
-                delegate: _SliverPersistentHeader(
-                  infoBar: _buildBannerList(),
-                  appBar: _buildBoxSearch(),
-                  minHeight: 60,
-                  maxHeight: 200,
-                ),
-                pinned: true,
+        child: Column(
+          children: [
+            _buildAppbar(),
+            Container(
+              color: Colors.white12,
+              height: 0.5,
+            ),
+            Expanded(
+              child: CustomScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                slivers: [
+                  SliverPersistentHeader(
+                    delegate: _SliverPersistentHeader(
+                      infoBar: _buildBannerList(),
+                      appBar: _buildBoxSearch(),
+                      minHeight: 60,
+                      maxHeight: 200,
+                    ),
+                    pinned: true,
+                  ),
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      _buildCateList(),
+                      _buildTitle(),
+                      _buildPopularList(),
+                      _buildTitle(),
+                      _buildPopularList(),
+                      _buildTitle(),
+                      _buildPopularList(),
+                    ]),
+                  ),
+                ],
               ),
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  _buildCateList(),
-                  _buildTitle(),
-                  _buildPopularList(),
-                  _buildTitle(),
-                  _buildPopularList(),
-                  _buildTitle(),
-                  _buildPopularList(),
-                ]),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -158,7 +188,25 @@ class HomePageState extends State<HomePage> {
       child: Row(
         children: [
           Container(
-            child: Image.asset(UIData.ic_menu),
+            width: 30,
+            height: 30,
+            child: InkWell(
+                onTap: () {
+                  setState(() {
+                    if (isDrawerOpen) {
+                      xOffset = 0;
+                      yOffset = 0;
+                      scaleFactor = 1;
+                      isDrawerOpen = false;
+                    } else {
+                      xOffset = 230;
+                      yOffset = 150;
+                      scaleFactor = 0.6;
+                      isDrawerOpen = true;
+                    }
+                  });
+                },
+                child: Image.asset(UIData.ic_menu)),
           ),
           Expanded(
             child: Column(

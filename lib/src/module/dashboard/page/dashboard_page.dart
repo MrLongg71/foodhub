@@ -8,6 +8,8 @@ import 'package:foodhub/src/module/order/pages/order_page.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/route_generator.dart';
 
+import 'drawer_menu_page.dart';
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key key}) : super(key: key);
 
@@ -56,8 +58,10 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       CupertinoTabView(
         builder: (BuildContext context) {
-          return MapPage(
-            key: mapPageKey,
+          print(homePageKey.currentState.xOffset);
+          return
+           MapPage(
+              key: mapPageKey,
           );
         },
         navigatorKey: mapKey,
@@ -95,14 +99,15 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      resizeToAvoidBottomInset: true,
-      controller: _tabController,
-      tabBuilder: (BuildContext context, int index) {
-        return listTab[index];
-      },
-      tabBar: _buildTabBar(),
-    );
+    return Scaffold(
+        body: CupertinoTabScaffold(
+          resizeToAvoidBottomInset: true,
+          controller: _tabController,
+          tabBuilder: (BuildContext context, int index) {
+            return listTab[index];
+          },
+          tabBar: _buildTabBar(),
+        ));
   }
 
   Widget _buildTabBar() {
