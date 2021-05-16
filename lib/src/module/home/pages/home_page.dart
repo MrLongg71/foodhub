@@ -349,68 +349,76 @@ class HomePageState extends State<HomePage> {
   }
 
   Widget _buildPopularItem() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      decoration: BoxDecoration(
-          color: MyColors.bgTextField, borderRadius: BorderRadius.circular(10)),
-      width: 200,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                child: Image.asset(
-                  UIData.image1,
-                  height: 150,
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              Positioned(top: 10, right: 10, child: Icon(Icons.favorite)),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Text(
-              "McDonald's",
-              style: StylesText.body17CenterRegularWhite,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
+    return InkWell(
+      onTap: () => navigateToNewScreen('/food-detail'),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        decoration: BoxDecoration(
+            color: MyColors.bgTextField, borderRadius: BorderRadius.circular(10)),
+        width: 200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 3.0),
-                  child: Text(
-                    "4.5",
-                    style: StylesText.body12White,
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Image.asset(
+                    UIData.image1,
+                    height: 150,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
-                Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                  size: 15,
-                ),
-                Spacer(),
-                Icon(
-                  Icons.mode_comment_outlined,
-                  size: 15,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 3.0),
-                  child: Text(
-                    "5",
-                    style: StylesText.body12White,
-                  ),
-                ),
+                Positioned(top: 10, right: 10, child: Icon(Icons.favorite)),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Text(
+                "McDonald's",
+                style: StylesText.body17CenterRegularWhite,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 3.0),
+                    child: Text(
+                      "4.5",
+                      style: StylesText.body12White,
+                    ),
+                  ),
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                    size: 15,
+                  ),
+                  Spacer(),
+                  Icon(
+                    Icons.mode_comment_outlined,
+                    size: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 3.0),
+                    child: Text(
+                      "5",
+                      style: StylesText.body12White,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  navigateToNewScreen(String routeName, {dynamic argument}) {
+    Navigator.of(context, rootNavigator: true)
+        .pushNamed(routeName, arguments: argument);
   }
 }
 

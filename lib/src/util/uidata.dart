@@ -32,6 +32,8 @@ class UIData {
   static const String ic_profile = "$imageDir/ic_profile.png";
   static const String ic_setting = "$imageDir/ic_setting.png";
   static const String ic_wallet = "$imageDir/ic_wallet.png";
+
+  static const String ic_cart = "$imageDir/ic_cart.png";
 }
 
 class AppSize {

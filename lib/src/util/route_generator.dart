@@ -6,6 +6,7 @@ import 'package:foodhub/src/module/authentication/pages/splash_screen_page.dart'
 import 'package:foodhub/src/module/authentication/pages/verification_code_page.dart';
 import 'package:foodhub/src/module/authentication/pages/welcome_page.dart';
 import 'package:foodhub/src/module/dashboard/page/dashboard_page.dart';
+import 'package:foodhub/src/module/foods/pages/food_detail_page.dart';
 import 'package:foodhub/src/module/foods/pages/review_page.dart';
 import 'package:foodhub/src/module/home/pages/home_page.dart';
 
@@ -28,6 +29,8 @@ class RouteGenerator {
         return _buildRoute(settings, DashboardPage());
       case '/home':
         return _buildRoute(settings, HomePage());
+      case '/food-detail':
+        return _buildRoute(settings, FoodDetailPage());
       case '/review':
         return _buildRoute(settings, ReviewPage());
       default:
