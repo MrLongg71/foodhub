@@ -9,6 +9,7 @@ import 'package:foodhub/src/module/dashboard/page/dashboard_page.dart';
 import 'package:foodhub/src/module/foods/pages/food_detail_page.dart';
 import 'package:foodhub/src/module/foods/pages/review_page.dart';
 import 'package:foodhub/src/module/home/pages/home_page.dart';
+import 'package:foodhub/src/module/home/pages/search_food_page.dart';
 
 class RouteGenerator {
   static Route routeAll(RouteSettings settings) {
@@ -33,6 +34,8 @@ class RouteGenerator {
         return _buildRoute(settings, FoodDetailPage());
       case '/review':
         return _buildRoute(settings, ReviewPage());
+      case '/search-food':
+        return _buildRoute(settings, SearchFoodPage());
       default:
         return _errorRoute();
     }

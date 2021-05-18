@@ -21,7 +21,7 @@ class HomePageState extends State<HomePage> {
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
-
+  Timer timer;
   bool isDrawerOpen = false;
 
   @override
@@ -29,19 +29,25 @@ class HomePageState extends State<HomePage> {
     super.initState();
     indexSelected = -1;
     pageBannerController = PageController(initialPage: 1);
-    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+    timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (indexSelected < 10) {
         indexSelected++;
       } else {
         indexSelected = 0;
       }
-
-      pageBannerController.animateToPage(
-        indexSelected,
-        duration: Duration(milliseconds: 350),
-        curve: Curves.easeIn,
-      );
+      //
+      // pageBannerController.animateToPage(
+      //   indexSelected,
+      //   duration: Duration(milliseconds: 350),
+      //   curve: Curves.easeIn,
+      // );
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -234,49 +240,52 @@ class HomePageState extends State<HomePage> {
   }
 
   Widget _buildBoxSearch() {
-    return Container(
-      padding: EdgeInsets.only(bottom: 5),
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                enabled: false,
-                filled: true,
-                fillColor: MyColors.bgTextField,
-                contentPadding: EdgeInsets.all(10),
-                hintText: "Find for food or restaurant",
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.white54,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: Colors.red),
+    return InkWell(
+      onTap: () => navigateToNewScreen('/search-food'),
+      child: Container(
+        padding: EdgeInsets.only(bottom: 5),
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  enabled: false,
+                  filled: true,
+                  fillColor: MyColors.bgTextField,
+                  contentPadding: EdgeInsets.all(10),
+                  hintText: "Find for food or restaurant",
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.white54,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: MyColors.bgTextField),
-              height: 45,
-              width: 45,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.asset(
-                  UIData.ic_filter,
-                  fit: BoxFit.cover,
-                ),
-              ))
-        ],
+            SizedBox(
+              width: 20,
+            ),
+            Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: MyColors.bgTextField),
+                height: 45,
+                width: 45,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset(
+                    UIData.ic_filter,
+                    fit: BoxFit.cover,
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }
@@ -354,7 +363,8 @@ class HomePageState extends State<HomePage> {
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-            color: MyColors.bgTextField, borderRadius: BorderRadius.circular(10)),
+            color: MyColors.bgTextField,
+            borderRadius: BorderRadius.circular(10)),
         width: 200,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
