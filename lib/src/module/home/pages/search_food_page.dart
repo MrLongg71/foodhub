@@ -37,7 +37,6 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
       leading: Icon(Icons.arrow_back_ios),
       title: Text(
         "Search Food",
-        style: StylesText.tagLine15SemiBoldWhite,
       ),
     );
   }

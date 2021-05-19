@@ -139,14 +139,15 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   Widget _buildButtonAddCart() {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 50),
-        width: 130,
-        height: 40.0,
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: FilledRoundButton.withColor(
           radius: 28,
           pureColor: MyColors.tanHide,
-          prefIcon: Image.asset(
-            UIData.ic_cart,
+          prefIcon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              UIData.ic_cart,
+            ),
           ),
           text: Text(
             "Add to cart",

@@ -176,6 +176,11 @@ class StylesText {
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
       fontSize: 15.0);
+  static const body15LeftW500TanHide = const TextStyle(
+      color: MyColors.tanHide,
+      fontWeight: FontWeight.w500,
+      fontStyle: FontStyle.normal,
+      fontSize: 15.0);
   static const body15CenterSemiBoldWhite = const TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.w900,
