@@ -51,7 +51,6 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
           Expanded(
             child: TextField(
               decoration: InputDecoration(
-                enabled: false,
                 filled: true,
                 fillColor: MyColors.bgTextField,
                 contentPadding: EdgeInsets.all(10),

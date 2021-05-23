@@ -1,5 +1,5 @@
 class ConfigEnv {
   static String getDomainAPI() {
-    return "http://localhost:4000";
+    return "http://vn-food.herokuapp.com/";
   }
 }
