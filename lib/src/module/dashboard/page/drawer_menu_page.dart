@@ -3,6 +3,7 @@ import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class DrawerMenuPage extends StatefulWidget {
   const DrawerMenuPage({Key key}) : super(key: key);
@@ -116,6 +117,8 @@ class _DrawerMenuPageState extends State<DrawerMenuPage> {
   }
 
   Widget _buildButtonLogout() {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 50),
       width: 130,
@@ -133,7 +136,12 @@ class _DrawerMenuPageState extends State<DrawerMenuPage> {
               .headline
               .merge(TextStyle(color: Colors.white)),
         ),
-        onTap: () {},
+        onTap: () {
+          print('sds');
+          // _googleSignIn.signOut();
+          Navigator.of(context, rootNavigator: true)
+              .pushNamedAndRemoveUntil("/", ModalRoute.withName("/"));
+        },
       ),
     );
   }

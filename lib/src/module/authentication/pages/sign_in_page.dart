@@ -117,7 +117,8 @@ class _SignInPageState extends State<SignInPage> {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 14.0),
-                recognizer: TapGestureRecognizer()..onTap = () => navigateToNewScreen('/sign-up')),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => navigateToNewScreen('/sign-up')),
           ],
         ),
       ),

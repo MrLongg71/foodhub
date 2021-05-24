@@ -1,11 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/text_data.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInWith extends StatelessWidget {
-  const SignInWith({Key key}) : super(key: key);
+  final BuildContext ctx;
+
+  const SignInWith({Key key, this.ctx}) : super(key: key);
+
+  BuildContext get context => ctx;
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +76,34 @@ class SignInWith extends StatelessWidget {
       child: FilledRoundButton.withColor(
         pureColor: MyColors.orangeRed,
         text: Text(TextData.signInWithGG, style: StylesText.largeTitle),
-        onTap: () {},
+        onTap: () {
+          print("dsds");
+
+          _loginWithGmail().then((u) => {navigateToNewScreen('/dashboard')});
+        },
       ),
     );
+  }
+
+  Future<UserCredential> _loginWithGmail() async {
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    UserCredential authResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    return authResult;
+  }
+
+  navigateToNewScreen(String routeName, {dynamic argument}) {
+    Navigator.of(context, rootNavigator: true)
+        .pushNamed(routeName, arguments: argument);
   }
 }

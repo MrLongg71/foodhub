@@ -58,7 +58,6 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       CupertinoTabView(
         builder: (BuildContext context) {
-          print(homePageKey.currentState.xOffset);
           return
            MapPage(
               key: mapPageKey,

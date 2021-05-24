@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/alert_progress.dart';
@@ -8,6 +9,7 @@ import 'package:foodhub/src/util/text_data.dart';
 import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:foodhub/src/widgets/stateless/sign_in_with.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -92,7 +94,7 @@ class _WelcomeFormState extends State<WelcomeForm> {
                 _buildWelcomeText(),
                 Column(
                   children: [
-                    SignInWith(),
+                    SignInWith(ctx: context,),
                     _buildButtonLogin(),
                     _buildTextSignIn()
                   ],
@@ -163,7 +165,6 @@ class _WelcomeFormState extends State<WelcomeForm> {
 
   void _loginWithFB() async {}
 
-  void _loginWithGmail() async {}
 
   void _showErrorMessage(String content) => showDialog(
       context: context,
