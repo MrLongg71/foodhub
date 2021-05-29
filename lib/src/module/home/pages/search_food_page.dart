@@ -5,14 +5,14 @@ import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 
 class SearchFoodPage extends StatefulWidget {
-  const SearchFoodPage({Key key}) : super(key: key);
+  const SearchFoodPage({Key? key}) : super(key: key);
 
   @override
   _SearchFoodPageState createState() => _SearchFoodPageState();
 }
 
 class _SearchFoodPageState extends State<SearchFoodPage> {
-  double paddingTop;
+  double? paddingTop;
 
   @override
   Widget build(BuildContext context) {

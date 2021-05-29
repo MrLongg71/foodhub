@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'authentication_event.dart';
 import 'authentication_state.dart';
 
@@ -7,9 +7,7 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   // final UserRepository userRepository;
 
-  AuthenticationBloc()
-      : assert(null),
-        super(Uninitialized());
+  AuthenticationBloc() : super(Uninitialized());
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -37,9 +35,7 @@ class AuthenticationBloc
         // var res = await userRepository.getMyProfile();
         //
         // yield Authenticated(user: res.data, versionApp: _packageInfo.version);
-      } catch (e) {
-
-      }
+      } catch (e) {}
     }
 
     if (event is LoggedOut) {

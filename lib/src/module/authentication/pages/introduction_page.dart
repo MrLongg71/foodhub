@@ -9,8 +9,8 @@ class IntroductionPage extends StatefulWidget {
 }
 
 class _IntroductionPageState extends State<IntroductionPage> {
-  double paddingTop;
-  PageController pageIntroController;
+  double? paddingTop;
+  PageController? pageIntroController;
 
   @override
   void initState() {
@@ -29,13 +29,13 @@ class _IntroductionPageState extends State<IntroductionPage> {
             UIData.ic_intro_1,
             "Browse your menu \n and order directly",
             " Our app can send you everywhere, even \n space. For only 2.99 per month",
-            () => pageIntroController.animateToPage(1,
+            () => pageIntroController?.animateToPage(1,
                 duration: Duration(milliseconds: 500), curve: Curves.linear)),
         _buildIntro(
             UIData.ic_intro_2,
             "Even to space \n with us! Together",
             " Our app can send you everywhere, even \n space. For only 2.99 per month",
-            () => pageIntroController.animateToPage(2,
+            () => pageIntroController?.animateToPage(2,
                 duration: Duration(milliseconds: 500), curve: Curves.linear)),
         _buildIntro(
             UIData.ic_intro_3,
@@ -46,9 +46,10 @@ class _IntroductionPageState extends State<IntroductionPage> {
     ));
   }
 
-  Widget _buildIntro(String image, String title, String desc, Function onTap) {
+  Widget _buildIntro(
+      String image, String title, String desc, GestureTapCallback onTap) {
     return Container(
-      padding: EdgeInsets.only(top: paddingTop),
+      padding: EdgeInsets.only(top: paddingTop ?? 0),
       child: Center(
         child: SingleChildScrollView(
           child: Column(

@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:foodhub/src/module/authentication/bloc/bloc_login/bloc_login.dart';
+import 'package:foodhub/src/resource/repository/user_repository.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
@@ -7,13 +9,19 @@ import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:foodhub/src/widgets/stateless/custom_text_field.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
+  LoginBloc? _loginBloc;
+  @override
+  void initState() {
+    super.initState();
+    _loginBloc = LoginBloc(userRepository: UserRepository());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,11 +98,12 @@ class _SignInPageState extends State<SignInPage> {
           "Sign In",
           style: Theme.of(context)
               .textTheme
-              .headline
+              .headline!
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () {
-          navigateToNewScreen('/dashboard');
+          // navigateToNewScreen('/dashboard');
+          _loginBloc!.add(LoggedIn(email: 'mrlongg71@gmail.com', password: '1234567'));
         },
       ),
     );

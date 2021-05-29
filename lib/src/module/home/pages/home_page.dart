@@ -7,21 +7,21 @@ import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   HomePageState createState() => HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-  double paddingTop;
-  int indexSelected;
-  PageController pageBannerController;
+  double? paddingTop;
+  int indexSelected = 0;
+  PageController? pageBannerController;
 
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
-  Timer timer;
+  Timer? timer;
   bool isDrawerOpen = false;
 
   @override
@@ -47,7 +47,7 @@ class HomePageState extends State<HomePage> {
   @override
   void dispose() {
     super.dispose();
-    timer.cancel();
+    timer?.cancel();
   }
 
   @override
@@ -189,7 +189,7 @@ class HomePageState extends State<HomePage> {
 
   Widget _buildAppbar() {
     return Container(
-      margin: EdgeInsets.only(top: paddingTop, left: 10, right: 10),
+      margin: EdgeInsets.only(top: paddingTop ?? 0, left: 10, right: 10),
       padding: EdgeInsets.all(10),
       child: Row(
         children: [
@@ -439,7 +439,10 @@ class _SliverPersistentHeader extends SliverPersistentHeaderDelegate {
   final double maxHeight;
 
   _SliverPersistentHeader(
-      {this.infoBar, this.appBar, this.minHeight, this.maxHeight});
+      {required this.infoBar,
+      required this.appBar,
+      required this.minHeight,
+      required this.maxHeight});
 
   @override
   Widget build(

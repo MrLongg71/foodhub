@@ -5,14 +5,14 @@ import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 
 class VerificationCodePage extends StatefulWidget {
-  const VerificationCodePage({Key key}) : super(key: key);
+  const VerificationCodePage({Key? key}) : super(key: key);
 
   @override
   _VerificationCodePageState createState() => _VerificationCodePageState();
 }
 
 class _VerificationCodePageState extends State<VerificationCodePage> {
-  double _paddingTop;
+  double? _paddingTop;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class _VerificationCodePageState extends State<VerificationCodePage> {
             child: Image.asset(UIData.ic_3),
           ),
           Container(
-            margin:
-                EdgeInsets.only(left: 20, right: 20, top: _paddingTop + 100),
+            margin: EdgeInsets.only(
+                left: 20, right: 20, top: _paddingTop ?? 0 + 100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class FilledRoundButton extends StatefulWidget {
-  final Gradient gradientColor;
-  final Color pureColor;
+  final Gradient? gradientColor;
+  final Color? pureColor;
   final double radius;
-  final Text text;
-  final Widget prefIcon;
-  final VoidCallback onTap;
+  final Text? text;
+  final Widget? prefIcon;
+  final VoidCallback? onTap;
 
   FilledRoundButton.withGradient({
     @required this.gradientColor,
@@ -40,7 +40,7 @@ class _FilledRoundButtonState extends State<FilledRoundButton> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              widget.prefIcon,
+              widget.prefIcon ?? SizedBox(),
               const SizedBox(width: 5.0),
               Container(
                 child: widget.text,

@@ -5,15 +5,15 @@ import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 
 class FoodDetailPage extends StatefulWidget {
-  const FoodDetailPage({Key key}) : super(key: key);
+  const FoodDetailPage({Key? key}) : super(key: key);
 
   @override
   _FoodDetailPageState createState() => _FoodDetailPageState();
 }
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
-  EdgeInsets padding;
-  Size size;
+  EdgeInsets? padding;
+  Size? size;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           Positioned(
             left: 15,
             right: 15,
-            top: padding.top,
+            top: padding?.top,
             child: Row(
               children: [
                 Container(
@@ -153,7 +153,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             "Add to cart",
             style: Theme.of(context)
                 .textTheme
-                .headline
+                .headline!
                 .merge(TextStyle(color: Colors.white)),
           ),
           onTap: () {},

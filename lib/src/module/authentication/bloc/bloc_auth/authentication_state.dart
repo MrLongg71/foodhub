@@ -17,7 +17,7 @@ class Authenticated extends AuthenticationState {
   // Authenticated({this.user, this.versionApp});
 
   @override
-  List<Object> get props => [null];
+  List<Object> get props => [""];
 }
 
 class Unauthenticated extends AuthenticationState {}

@@ -7,11 +7,11 @@ import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInWith extends StatelessWidget {
-  final BuildContext ctx;
+  final BuildContext? ctx;
 
-  const SignInWith({Key key, this.ctx}) : super(key: key);
+  const SignInWith({Key? key, this.ctx}) : super(key: key);
 
-  BuildContext get context => ctx;
+  BuildContext? get context => ctx;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class SignInWith extends StatelessWidget {
   }
 
   Future<UserCredential> _loginWithGmail() async {
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount googleUser = (await GoogleSignIn().signIn())!;
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
@@ -103,7 +103,7 @@ class SignInWith extends StatelessWidget {
   }
 
   navigateToNewScreen(String routeName, {dynamic argument}) {
-    Navigator.of(context, rootNavigator: true)
+    Navigator.of(context!, rootNavigator: true)
         .pushNamed(routeName, arguments: argument);
   }
 }

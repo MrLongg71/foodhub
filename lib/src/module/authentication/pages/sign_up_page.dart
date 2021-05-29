@@ -7,7 +7,7 @@ import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:foodhub/src/widgets/stateless/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key key}) : super(key: key);
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -97,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
           "Sign Up",
           style: Theme.of(context)
               .textTheme
-              .headline
+              .headline!
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () {

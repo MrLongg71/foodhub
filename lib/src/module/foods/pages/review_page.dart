@@ -6,14 +6,14 @@ import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 
 class ReviewPage extends StatefulWidget {
-  const ReviewPage({Key key}) : super(key: key);
+  const ReviewPage({Key? key}) : super(key: key);
 
   @override
   _ReviewPageState createState() => _ReviewPageState();
 }
 
 class _ReviewPageState extends State<ReviewPage> {
-  EdgeInsets _padding;
+  EdgeInsets? _padding;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _ReviewPageState extends State<ReviewPage> {
     );
   }
 
-  Widget _buildAppbar() {
+  PreferredSizeWidget _buildAppbar() {
     return AppBar(
       title: Text("Review"),
       leading: Icon(Icons.arrow_back_ios),
@@ -126,7 +126,7 @@ class _ReviewPageState extends State<ReviewPage> {
           "Review",
           style: Theme.of(context)
               .textTheme
-              .headline
+              .headline5!
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () {},

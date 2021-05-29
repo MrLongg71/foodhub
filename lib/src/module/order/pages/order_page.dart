@@ -5,7 +5,7 @@ import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 
 class OrderPage extends StatefulWidget {
-  const OrderPage({Key key}) : super(key: key);
+  const OrderPage({Key? key}) : super(key: key);
 
   @override
   OrderPageState createState() => OrderPageState();
@@ -23,7 +23,7 @@ class OrderPageState extends State<OrderPage> {
     );
   }
 
-  Widget _buildAppbar() {
+  PreferredSizeWidget _buildAppbar() {
     return AppBar(
       title: Text("Orders"),
     );
@@ -149,7 +149,7 @@ class OrderPageState extends State<OrderPage> {
               "Apply",
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .headline5!
                   .merge(TextStyle(color: Colors.white)),
             ),
             onTap: () {},
@@ -205,7 +205,7 @@ class OrderPageState extends State<OrderPage> {
           "Checkout",
           style: Theme.of(context)
               .textTheme
-              .headline5
+              .headline5!
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () {

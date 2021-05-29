@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String titleText;
+  final String? titleText;
   final String hintText;
   final double height;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Color borderColor;
   final bool hasBorder;
-  final Widget suffixIcon;
+  final Widget? suffixIcon;
   final double paddingVertical;
   final double radius;
   final bool isAlignText;
-  final TextEditingController controller;
-  final TextStyle styleText;
-  final TextStyle styleHintText;
-  final FocusNode focusNode;
+  final TextEditingController? controller;
+  final TextStyle? styleText;
+  final TextStyle? styleHintText;
+  final FocusNode? focusNode;
   final bool obscureText;
   final bool enable;
   final TextInputType keyboardType;
-  final Function(String) onValueChanged;
-  final Function(String) onCompleted;
+  final Function(String)? onValueChanged;
+  final Function(String)? onCompleted;
 
   const CustomTextField({
-    Key key,
+    Key? key,
     this.titleText,
     this.hintText = 'Place holder',
     this.backgroundColor,
@@ -53,7 +53,7 @@ class CustomTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            titleText,
+            titleText!,
             style: TextStyle(color: Color(0xffffADADB8)),
           ),
           SizedBox(

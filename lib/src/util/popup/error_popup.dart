@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class ErrorPopup extends StatelessWidget {
   final String content;
   final String confirmText;
-  final Function() onOk;
+  final Function()? onOk;
   final String title;
 
   const ErrorPopup(
@@ -25,7 +25,7 @@ class ErrorPopup extends StatelessWidget {
         CupertinoActionSheetAction(
           onPressed: () {
             Navigator.pop(context);
-            if (onOk != null) onOk();
+              onOk!();
           },
           child: Text("OK"),
         )

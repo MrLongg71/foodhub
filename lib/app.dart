@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/themes.dart';
 
 import 'src/util/route_generator.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -19,8 +18,8 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: Themes.kDarkTheme,
         onGenerateRoute: RouteGenerator.routeAll,
-        builder: (BuildContext ctx, Widget child) {
-          return _builder(ctx, child);
+        builder: (BuildContext? ctx, Widget? child) {
+          return _builder(ctx!, child!);
         }
         // home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         //   builder: (BuildContext context, AuthenticationState state) {

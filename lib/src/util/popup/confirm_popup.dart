@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class ConfirmPopup extends StatelessWidget {
-  final String content;
-  final String confirmText;
-  final String cancelText;
-  final String confirmTitle;
+  final String? content;
+  final String? confirmText;
+  final String? cancelText;
+  final String? confirmTitle;
 
   const ConfirmPopup({
     this.content,
@@ -20,7 +20,7 @@ class ConfirmPopup extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Text("Thông báo"),
       ),
-      content: Text(content),
+      content: Text(content??''),
       actions: <Widget>[
         CupertinoDialogAction(
           child: Text("Trở về"),

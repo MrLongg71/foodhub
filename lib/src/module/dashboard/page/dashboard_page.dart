@@ -8,10 +8,8 @@ import 'package:foodhub/src/module/order/pages/order_page.dart';
 import 'package:foodhub/src/util/colors.dart';
 import 'package:foodhub/src/util/route_generator.dart';
 
-import 'drawer_menu_page.dart';
-
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key key}) : super(key: key);
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -36,10 +34,10 @@ class _DashboardPageState extends State<DashboardPage> {
   GlobalKey<NotificationPageState> notificationPageKey =
       GlobalKey(debugLabel: 'notificationPageKey');
 
-  CupertinoTabController _tabController;
+  late CupertinoTabController _tabController;
   int oldTab = 0;
 
-  List<Widget> listTab;
+  late List<Widget> listTab;
 
   @override
   void initState() {
@@ -58,9 +56,8 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       CupertinoTabView(
         builder: (BuildContext context) {
-          return
-           MapPage(
-              key: mapPageKey,
+          return MapPage(
+            key: mapPageKey,
           );
         },
         navigatorKey: mapKey,
@@ -100,16 +97,16 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CupertinoTabScaffold(
-          resizeToAvoidBottomInset: true,
-          controller: _tabController,
-          tabBuilder: (BuildContext context, int index) {
-            return listTab[index];
-          },
-          tabBar: _buildTabBar(),
-        ));
+      resizeToAvoidBottomInset: true,
+      controller: _tabController,
+      tabBuilder: (BuildContext context, int index) {
+        return listTab[index];
+      },
+      tabBar: _buildTabBar(),
+    ));
   }
 
-  Widget _buildTabBar() {
+  CupertinoTabBar _buildTabBar() {
     return CupertinoTabBar(
       backgroundColor: Theme.of(context).backgroundColor,
       onTap: onTabTap,
@@ -144,40 +141,40 @@ class _DashboardPageState extends State<DashboardPage> {
         if (index != oldTab) {
           break;
         }
-        if (homeKey.currentState.canPop()) {
-          homeKey.currentState.pop();
+        if (homeKey.currentState!.canPop()) {
+          homeKey.currentState!.pop();
         }
         break;
       case 1:
         if (index != oldTab) {
           break;
         }
-        if (mapKey.currentState.canPop()) {
-          mapKey.currentState.pop();
+        if (mapKey.currentState!.canPop()) {
+          mapKey.currentState!.pop();
         }
         break;
       case 2:
         if (index != oldTab) {
           break;
         }
-        if (orderKey.currentState.canPop()) {
-          orderKey.currentState.pop();
+        if (orderKey.currentState!.canPop()) {
+          orderKey.currentState!.pop();
         }
         break;
       case 3:
         if (index != oldTab) {
           break;
         }
-        if (favoriteKey.currentState.canPop()) {
-          favoriteKey.currentState.pop();
+        if (favoriteKey.currentState!.canPop()) {
+          favoriteKey.currentState!.pop();
         }
         break;
       case 4:
         if (index != oldTab) {
           break;
         }
-        if (notificationKey.currentState.canPop()) {
-          notificationKey.currentState.pop();
+        if (notificationKey.currentState!.canPop()) {
+          notificationKey.currentState!.pop();
         }
     }
     oldTab = index;

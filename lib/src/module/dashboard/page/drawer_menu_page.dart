@@ -6,14 +6,14 @@ import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class DrawerMenuPage extends StatefulWidget {
-  const DrawerMenuPage({Key key}) : super(key: key);
+  const DrawerMenuPage({Key? key}) : super(key: key);
 
   @override
   _DrawerMenuPageState createState() => _DrawerMenuPageState();
 }
 
 class _DrawerMenuPageState extends State<DrawerMenuPage> {
-  EdgeInsets padding;
+  EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _DrawerMenuPageState extends State<DrawerMenuPage> {
 
   Widget _buildBody() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: padding.top),
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: padding?.top ?? 0),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -133,7 +133,7 @@ class _DrawerMenuPageState extends State<DrawerMenuPage> {
           "Logout",
           style: Theme.of(context)
               .textTheme
-              .headline
+              .headline5!
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () {

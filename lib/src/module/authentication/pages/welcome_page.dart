@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodhub/src/util/alert_progress.dart';
@@ -9,7 +8,6 @@ import 'package:foodhub/src/util/text_data.dart';
 import 'package:foodhub/src/util/uidata.dart';
 import 'package:foodhub/src/widgets/stateful/filled_round_button.dart';
 import 'package:foodhub/src/widgets/stateless/sign_in_with.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -28,8 +26,8 @@ class WelcomeForm extends StatefulWidget {
 }
 
 class _WelcomeFormState extends State<WelcomeForm> {
-  Size _size;
-  Widget loadingWidget;
+  Size? _size;
+  Widget? loadingWidget;
   bool showBtnGmail = true;
   bool isDarkMode = false;
 
@@ -134,7 +132,7 @@ class _WelcomeFormState extends State<WelcomeForm> {
           TextData.buttonSignIn,
           style: Theme.of(context)
               .textTheme
-              .headline
+              .headline5!
               .merge(TextStyle(color: Colors.white)),
         ),
         onTap: () => navigateToNewScreen('/sign-in'),

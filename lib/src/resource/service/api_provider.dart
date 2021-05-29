@@ -5,11 +5,11 @@ import 'package:foodhub/src/resource/service/token_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiProvider {
-  Dio _dio;
+  Dio? _dio;
 
   String get _accessToken => TokenManager().accessToken;
 
-  static final ApiProvider _instance = ApiProvider._internal();
+  static final ApiProvider? _instance = ApiProvider._internal();
 
   ApiProvider._internal() {
     BaseOptions baseOptions =
@@ -19,57 +19,61 @@ class ApiProvider {
   }
 
   factory ApiProvider() {
-    return _instance;
+    return _instance!;
   }
 
   setupInterceptors() {
-    _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+    _dio!.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       if (_accessToken.isEmpty) {
-        _dio.lock();
+        _dio!.lock();
 
-        return SharedPreferences.getInstance().then((sharedPreferences) {
+        SharedPreferences.getInstance().then((sharedPreferences) {
           TokenManager().load(sharedPreferences);
 
           print("calling with access token: $_accessToken");
           options.headers['Authorization'] = 'Bearer ' + _accessToken;
 
-          _dio.unlock();
+          _dio!.unlock();
           return options;
         });
       }
       print("calling with access token: $_accessToken");
 
       options.headers['Authorization'] = 'Bearer ' + _accessToken;
-      return options;
+      return handler.next(options);
     }, onResponse: (response, handler) {
-      return response;
+      return handler.next(response);
     }, onError: (DioError e, handler) {
-      print(e.response.toString());
-      print(e.response.statusCode);
-      if (e.response.statusCode == 503) {
-        return ErrorResponse(
-          statusCode: 503,
-          message: "Service is unavailable now, please try again",
-        );
-      } else if (e.response.statusCode == 409) {
-        Response err = ErrorResponse.fromJson(e.response.data);
-        return err;
-      }
-      return ErrorResponse(
-        statusCode: 0,
-        message: "Something went wrong",
-      );
+      print(e);
+      // print(e.response?.statusCode);
+
+      // if (e.response?.statusCode == 503) {
+      //   Response<ErrorResponse> err = ErrorResponse(
+      //     statusCode: 503,
+      //     message: "Service is unavailable now, please try again",
+      //   ) as Response<ErrorResponse>;
+      //   return handler.resolve(err);
+      // } else if (e.response?.statusCode == 409) {
+      //   Response err = ErrorResponse.fromJson(e.response!.data) as Response;
+      //   return handler.resolve(err);
+      // }
+      // Response<ErrorResponse> err = ErrorResponse(
+      //   statusCode: 0,
+      //   message: "Something went wrong " + e.message,
+      // ) as Response<ErrorResponse>;
+      // return handler.resolve(err);
+      // return handler.next(e);
     }));
   }
 
   Future<Response> get(
     String path, {
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
   }) async {
-    final res = await _dio.get(path,
+    final res = await _dio!.get(path,
         queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
@@ -82,13 +86,13 @@ class ApiProvider {
   Future<Response> post(
     String path, {
     data,
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onSendProgress,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
   }) async {
-    final res = await _dio.post(
+    final res = await _dio!.post(
       path,
       data: data,
       queryParameters: queryParameters,
@@ -105,13 +109,13 @@ class ApiProvider {
   Future<Response> put(
     String path, {
     data,
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onSendProgress,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
   }) async {
-    final res = await _dio.put(path,
+    final res = await _dio!.put(path,
         data: data,
         queryParameters: queryParameters,
         options: options,
@@ -126,11 +130,11 @@ class ApiProvider {
   Future<Response> delete(
     String path, {
     data,
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
   }) async {
-    final res = await _dio.delete(path,
+    final res = await _dio!.delete(path,
         data: data,
         queryParameters: queryParameters,
         options: options,

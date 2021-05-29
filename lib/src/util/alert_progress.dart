@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'uidata.dart';
 
-// ignore: must_be_immutable
 class ProgressDialog extends StatefulWidget {
-  ProgressDialogState progressDialogState;
+ late final ProgressDialogState progressDialogState;
 
   //@override
   // ProgressDialogState createState() => ProgressDialogState();

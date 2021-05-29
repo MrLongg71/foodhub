@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key key}) : super(key: key);
+  const MapPage({Key? key}) : super(key: key);
 
   @override
   MapPageState createState() => MapPageState();

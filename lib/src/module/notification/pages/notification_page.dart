@@ -3,7 +3,7 @@ import 'package:foodhub/src/util/styles.dart';
 import 'package:foodhub/src/util/uidata.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key key}) : super(key: key);
+  const NotificationPage({Key? key}) : super(key: key);
 
   @override
   NotificationPageState createState() => NotificationPageState();
@@ -22,7 +22,7 @@ class NotificationPageState extends State<NotificationPage> {
     return Container(child: _buildListNotify());
   }
 
-  Widget _buildAppbar() {
+  PreferredSizeWidget _buildAppbar() {
     return AppBar(
       elevation: 0,
       title: Text("Notification"),
